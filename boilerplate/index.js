@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-require("dotenv").config();
+const config = require("./config/key");
 const port = 3000;
 const { User } = require("./models/User");
 
@@ -10,9 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.padg1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
-  )
+  .connect(config.mongoURI)
   .then(() => console.log("MongoDB connected..."))
   .catch((error) => console.error(error));
 
