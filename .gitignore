@@ -1,5 +1,9 @@
+.idea
+.vscode
+
 **/node_modules
 **/.env
 **/.DS_Store
-
 **/config/dev.js
+
+.DS_Store
