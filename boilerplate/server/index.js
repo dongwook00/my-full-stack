@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
-const port = 3000;
+const port = 8081;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -15,7 +15,7 @@ mongoose
   .then(() => console.log("MongoDB connected..."))
   .catch((error) => console.error(error));
 
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/api/hello", (req, res) => res.send("Hello World!"));
 
 app.use("/api/users", require("./routes/users"));
 app.use("/api/favorite", require("./routes/favorite"));
