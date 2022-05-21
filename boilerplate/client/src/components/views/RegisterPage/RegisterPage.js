@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../../_actions/user_action";
 
-export default function RegisterPage() {
+export default function RegisterPage(props) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const dispatch = useDispatch();
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -20,7 +23,20 @@ export default function RegisterPage() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, name, password);
+
+    const body = {
+      email,
+      password,
+      name,
+    };
+
+    dispatch(registerUser(body)).then((response) => {
+      if (response.payload.success) {
+        props.history.push("/login");
+      } else {
+        alert("Failed to sign up");
+      }
+    });
   };
 
   return (
@@ -59,7 +75,7 @@ export default function RegisterPage() {
 
         <br />
 
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
