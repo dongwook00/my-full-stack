@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../../_actions/user_action";
 
 export default function Login() {
   const dispatch = useDispatch();
+  const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,7 +23,7 @@ export default function Login() {
     };
     dispatch(loginUser(body)).then((response) => {
       if (response.payload.loginSuccess) {
-        console.log("success");
+        history("/");
       } else {
         console.log("fail");
       }

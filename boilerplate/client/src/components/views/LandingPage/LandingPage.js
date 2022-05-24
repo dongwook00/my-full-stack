@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function LandingPage(props) {
+  const history = useNavigate();
   useEffect(() => {
     axios
       .get("/api/hello")
@@ -12,7 +14,7 @@ export default function LandingPage(props) {
   const handleLogout = () => {
     axios.get("/api/users/logout").then((response) => {
       if (response.data.success) {
-        props.history.push("/login");
+        history("/login");
       } else {
         alert("Failed to logout");
       }
